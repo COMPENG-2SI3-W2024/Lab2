@@ -8,7 +8,7 @@ GameMechs::GameMechs()
     boardSizeY = 15;
     exitFlag = false;
     loseFlag = false;
-    cmd = NULL;
+    cmd = '\0';
     delayConst = 100000;
     playerCount = 0;
 
@@ -19,7 +19,7 @@ GameMechs::GameMechs()
         gameBoard[i] = new char[boardSizeX];
     }
 
-    playerList = new Player*[4];  // up to 4 players only
+    playerList = new Player*[MAX_PLAYER_COUNT];  // up to 4 players only
 
     // Set up the initiali game board boarders
     setInitBoard();  
@@ -139,6 +139,7 @@ void GameMechs::applyDelay()
 
 void GameMechs::addPlayer(Player* pl)
 {
+    if(playerCount >= MAX_PLAYER_COUNT) return;
     playerList[playerCount] = pl;
     playerCount++;
 }
