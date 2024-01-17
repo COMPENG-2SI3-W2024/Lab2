@@ -3,6 +3,8 @@
 
 #include "Player.h"
 
+#define MAX_PLAYER_COUNT 4
+
 // Forward Declaration
 class Player;
 
