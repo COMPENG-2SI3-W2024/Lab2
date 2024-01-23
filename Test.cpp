@@ -8,17 +8,25 @@
 
 #define COUNT 10
 #define TOTAL_ASSERT_COUNT 439
+#define TOTAL_TEST_CASES 40
 
 #include <iostream>
 using namespace std;
 
+// ******************* //
+// Turn this true once you are ready to test getNext() and resetReadPos()
+bool testGetNextReady = false;
+// ******************* //
+
+
 objPosList *ListUnderTest;
 int successCount;
+int passCount;
 
 void clearList();
 objPos generateRandomPos();
-void assert_equal(int, int);
-void assert_equal(char, char);
+bool assert_equal(int, int);
+bool assert_equal(char, char);
 
 // This is the polymorphic list changer
 void createNewList()
@@ -28,31 +36,36 @@ void createNewList()
 	ListUnderTest = new objPosDLinkedList();
 }
 
-// Turn this true once you are ready to test getNext() and resetReadPos()
-bool testGetNextReady = false;
+
 
 
 
 void testConstructorGetSize() {
 	
+	bool result = true;
+
 	cout << "TEST: testConstructorGetSize" << endl;
 	createNewList();
 	int expected = 0;
 	int actual = ListUnderTest->getSize();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testConstructorIsEmptyTrue() {
 	
+	bool result = true;
+
 	cout << "TEST: testConstructorIsEmptyTrue" << endl;
 	createNewList();	
 	bool expected = true;
 	bool actual = ListUnderTest->isEmpty();		
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -63,6 +76,8 @@ void testConstructorIsEmptyTrue() {
 // INSERT HEAD
 
 void testInsertHeadIsEmptyFalse() {
+	
+	bool result = true;
 
 	cout << "TEST: testInsertHeadIsEmptyFalse" << endl;
 	createNewList();
@@ -72,12 +87,15 @@ void testInsertHeadIsEmptyFalse() {
 	bool expected = false;
 	bool actual = ListUnderTest->isEmpty();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetSize() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetSize" << endl;
 	createNewList();
 	objPos testPos{};
@@ -87,12 +105,15 @@ void testInsertHeadGetSize() {
 	int expected = 3;
 	int actual = ListUnderTest->getSize();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetHead() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetHead" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -105,16 +126,19 @@ void testInsertHeadGetHead() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->getHead();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetTail() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetTail" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -127,16 +151,19 @@ void testInsertHeadGetTail() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->getTail();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetNegTen() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetNegTen" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -149,16 +176,19 @@ void testInsertHeadGetNegTen() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->get(-10);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetZero() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetZero" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -171,16 +201,19 @@ void testInsertHeadGetZero() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->get(0);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetOne() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetOne" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -193,16 +226,19 @@ void testInsertHeadGetOne() {
 	objPos expected = itemArray[COUNT-2];
 	objPos actual = ListUnderTest->get(1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetCountN3() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetCountN3" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -215,16 +251,19 @@ void testInsertHeadGetCountN3() {
 	objPos expected = itemArray[2];
 	objPos actual = ListUnderTest->get(COUNT-3);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetCountN1() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetCountN1" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -237,16 +276,19 @@ void testInsertHeadGetCountN1() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->get(COUNT-1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertHeadGetCountP5() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertHeadGetCountP5" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -259,12 +301,13 @@ void testInsertHeadGetCountP5() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->get(COUNT+5);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -276,6 +319,8 @@ void testInsertHeadGetCountP5() {
 
 void testInsertTailIsEmptyFalse() {
 
+	bool result = true;
+
 	cout << "TEST: testInsertTailIsEmptyFalse" << endl;
 	createNewList();
 	objPos testPos{};
@@ -284,12 +329,15 @@ void testInsertTailIsEmptyFalse() {
 	bool expected = false;
 	bool actual = ListUnderTest->isEmpty();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetSize() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetSize" << endl;
 	createNewList();
 	objPos testPos{};
@@ -299,12 +347,15 @@ void testInsertTailGetSize() {
 	int expected = 3;
 	int actual = ListUnderTest->getSize();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetHead() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetHead" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -317,16 +368,19 @@ void testInsertTailGetHead() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->getHead();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetTail() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetTail" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -339,16 +393,19 @@ void testInsertTailGetTail() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->getTail();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetNegTen() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetNegTen" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -361,16 +418,19 @@ void testInsertTailGetNegTen() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->get(-10);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetZero() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetZero" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -383,16 +443,19 @@ void testInsertTailGetZero() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->get(0);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetOne() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetOne" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -405,16 +468,19 @@ void testInsertTailGetOne() {
 	objPos expected = itemArray[1];
 	objPos actual = ListUnderTest->get(1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetCountN3() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetCountN3" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -427,16 +493,19 @@ void testInsertTailGetCountN3() {
 	objPos expected = itemArray[COUNT-3];
 	objPos actual = ListUnderTest->get(COUNT-3);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetCountN1() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetCountN1" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -449,16 +518,19 @@ void testInsertTailGetCountN1() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->get(COUNT-1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertTailGetCountP5() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertTailGetCountP5" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -471,12 +543,13 @@ void testInsertTailGetCountP5() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->get(COUNT+5);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -488,6 +561,8 @@ void testInsertTailGetCountP5() {
 
 void testInsertIsEmptyFalse() {
 
+	bool result = true;
+
 	cout << "TEST: testInsertIsEmptyFalse" << endl;
 	createNewList();
 	objPos testPos{};
@@ -496,12 +571,15 @@ void testInsertIsEmptyFalse() {
 	bool expected = false;
 	bool actual = ListUnderTest->isEmpty();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetSize() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetSize" << endl;
 	createNewList();
 	objPos testPos{};
@@ -511,12 +589,15 @@ void testInsertGetSize() {
 	int expected = 3;
 	int actual = ListUnderTest->getSize();	
 
-	assert_equal(expected, actual);
+	result = result && assert_equal(expected, actual);
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetHead() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetHead" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -529,16 +610,19 @@ void testInsertGetHead() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->getHead();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetTail() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetTail" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -551,16 +635,19 @@ void testInsertGetTail() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->getTail();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetNegTen() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetNegTen" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -573,16 +660,19 @@ void testInsertGetNegTen() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->get(-10);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetZero() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetZero" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -595,16 +685,19 @@ void testInsertGetZero() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->get(0);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetOne() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetOne" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -617,16 +710,19 @@ void testInsertGetOne() {
 	objPos expected = itemArray[1];
 	objPos actual = ListUnderTest->get(1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetCountN3() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetCountN3" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -639,16 +735,19 @@ void testInsertGetCountN3() {
 	objPos expected = itemArray[COUNT-3];
 	objPos actual = ListUnderTest->get(COUNT-3);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetCountN1() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetCountN1" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -661,16 +760,19 @@ void testInsertGetCountN1() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->get(COUNT-1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testInsertGetCountP5() {
 	
+	bool result = true;
+
 	cout << "TEST: testInsertGetCountP5" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -683,12 +785,13 @@ void testInsertGetCountP5() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->get(COUNT+5);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -699,6 +802,8 @@ void testInsertGetCountP5() {
 
 void testRemoveHead() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveHead" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -711,22 +816,25 @@ void testRemoveHead() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->removeHead();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveTail() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveTail" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -739,22 +847,25 @@ void testRemoveTail() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->removeTail();	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveNegTen() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveNegTen" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -767,22 +878,25 @@ void testRemoveNegTen() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->remove(-10);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveZero() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveZero" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -795,22 +909,25 @@ void testRemoveZero() {
 	objPos expected = itemArray[0];
 	objPos actual = ListUnderTest->remove(0);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveOne() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveOne" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -823,22 +940,25 @@ void testRemoveOne() {
 	objPos expected = itemArray[1];
 	objPos actual = ListUnderTest->remove(1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveCountN3() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveCountN3" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -851,22 +971,25 @@ void testRemoveCountN3() {
 	objPos expected = itemArray[COUNT-3];
 	objPos actual = ListUnderTest->remove(COUNT-3);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveCountN1() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveCountN1" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -879,22 +1002,25 @@ void testRemoveCountN1() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->remove(COUNT-1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 void testRemoveCountP5() {
 	
+	bool result = true;
+
 	cout << "TEST: testRemoveCountP5" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -907,18 +1033,19 @@ void testRemoveCountP5() {
 	objPos expected = itemArray[COUNT-1];
 	objPos actual = ListUnderTest->remove(COUNT+5);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 
 	int actualSize = ListUnderTest->getSize();
 	int expectedSize = COUNT - 1;
 
-	assert_equal(expectedSize, actualSize);
+	result = result && assert_equal(expectedSize, actualSize);
 
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -929,6 +1056,8 @@ void testRemoveCountP5() {
 
 void testSetNegTen() {
 	
+	bool result = true;
+
 	cout << "TEST: testSetNegTen" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -942,16 +1071,19 @@ void testSetNegTen() {
 	ListUnderTest->set(expected, -10);
 	objPos actual = ListUnderTest->get(-10);	
 	
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testSetZero() {
 	
+	bool result = true;
+
 	cout << "TEST: testSetZero" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -965,16 +1097,19 @@ void testSetZero() {
 	ListUnderTest->set(expected, 0);
 	objPos actual = ListUnderTest->get(0);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testSetOne() {
 	
+	bool result = true;
+
 	cout << "TEST: testSetOne" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -988,16 +1123,19 @@ void testSetOne() {
 	ListUnderTest->set(expected, 1);
 	objPos actual = ListUnderTest->get(1);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testSetCountN3() {
 	
+	bool result = true;
+
 	cout << "TEST: testSetCountN3" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1011,16 +1149,19 @@ void testSetCountN3() {
 	ListUnderTest->set(expected, COUNT-3);
 	objPos actual = ListUnderTest->get(COUNT-3);	
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testSetCountN1() {
 	
+	bool result = true;
+
 	cout << "TEST: testSetCountN1" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1034,16 +1175,19 @@ void testSetCountN1() {
 	ListUnderTest->set(expected, COUNT-1);
 	objPos actual = ListUnderTest->get(COUNT-1);
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 void testSetCountP5() {
 	
+	bool result = true;
+
 	cout << "TEST: testSetCountP5" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1057,12 +1201,13 @@ void testSetCountP5() {
 	ListUnderTest->set(expected, COUNT+5);
 	objPos actual = ListUnderTest->get(COUNT+5);
 
-	assert_equal(expected.getX(), actual.getX());
-	assert_equal(expected.getY(), actual.getY());
-	assert_equal(expected.getNum(), actual.getNum());
-	assert_equal(expected.getPF(), actual.getPF());
-	assert_equal(expected.getSym(), actual.getSym());
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -1072,6 +1217,8 @@ void testSetCountP5() {
 
 void testGetNextResetWholeList() {
 	
+	bool result = true;
+
 	cout << "TEST: testGetNextResetWholeList" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1088,18 +1235,21 @@ void testGetNextResetWholeList() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 	
 	clearList();
+	if(result) passCount++;
 }
 
 void testGetNextResetPos2() {
 	
+	bool result = true;
+
 	cout << "TEST: testGetNextResetPos2" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1116,11 +1266,11 @@ void testGetNextResetPos2() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 
 	ListUnderTest->resetReadPos();
@@ -1129,18 +1279,21 @@ void testGetNextResetPos2() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 	
 	clearList();
+	if(result) passCount++;
 }
 
 void testGetNextResetPos5() {
 	
+	bool result = true;
+
 	cout << "TEST: testGetNextResetPos5" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1157,11 +1310,11 @@ void testGetNextResetPos5() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 
 	ListUnderTest->resetReadPos();
@@ -1170,18 +1323,21 @@ void testGetNextResetPos5() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 	
 	clearList();
+	if(result) passCount++;
 }
 
 void testGetNextResetPos8() {
 	
+	bool result = true;
+
 	cout << "TEST: testGetNextResetPos8" << endl;
 	createNewList();
 	objPos itemArray[COUNT];
@@ -1198,11 +1354,11 @@ void testGetNextResetPos8() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 
 	ListUnderTest->resetReadPos();
@@ -1211,14 +1367,15 @@ void testGetNextResetPos8() {
 		expected = itemArray[i];
 		actual = ListUnderTest->getNext();
 
-		assert_equal(expected.getX(), actual.getX());
-		assert_equal(expected.getY(), actual.getY());
-		assert_equal(expected.getNum(), actual.getNum());
-		assert_equal(expected.getPF(), actual.getPF());
-		assert_equal(expected.getSym(), actual.getSym());
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
 	}
 	
 	clearList();
+	if(result) passCount++;
 }
 
 
@@ -1287,10 +1444,12 @@ int main(int argc, char const *argv[]) {
   	
 	srand(time(NULL));
 	successCount = 0;
+	passCount = 0;
 	bool successCode = runAllTests(argc, argv);
 	if(successCode)	cout << endl << "Passed All Tests" << endl;
 	else			cout << "Failed Tests, Check Failure" << endl;	
 	cout << "Assertion Score: " << successCount << " / " << TOTAL_ASSERT_COUNT << endl;	
+	cout << "Test Case Score: " << passCount << " / " << TOTAL_TEST_CASES << endl;
 
 	return successCode? EXIT_SUCCESS : EXIT_FAILURE;
 }
@@ -1315,7 +1474,7 @@ objPos generateRandomPos()
 }
 
 
-void assert_equal(int a, int b)
+bool assert_equal(int a, int b)
 {
 	bool result = (a == b);
 	if(result)	
@@ -1324,10 +1483,10 @@ void assert_equal(int a, int b)
 	{
 		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;		
 	}
-	//return result;
+	return result;
 }
 
-void assert_equal(char a, char b)
+bool assert_equal(char a, char b)
 {
 	bool result = (a == b);
 	if(result)	
@@ -1336,5 +1495,5 @@ void assert_equal(char a, char b)
 	{
 		cout << "\t\tExpected: " << a << ", but Actual: " << b << endl;		
 	}
-	//return result;
+	return result;
 }
