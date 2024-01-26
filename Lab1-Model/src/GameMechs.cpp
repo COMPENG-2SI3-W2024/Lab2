@@ -1,5 +1,8 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
+#include <chrono>
+
+using namespace std;
 
 GameMechs::GameMechs()
 {
@@ -23,6 +26,10 @@ GameMechs::GameMechs()
 
     // Set up the initiali game board boarders
     setInitBoard();  
+
+    // new performance measurement features
+    totalTime = 0.0;
+    iterCount = 0;
 }
 
 GameMechs::~GameMechs()
@@ -149,4 +156,25 @@ void GameMechs::setGameLost()
 {
     setExitFlag();
     setLoseFlag();
+}
+
+
+
+/// New Performance Measurement Features
+void GameMechs::startMeasurement()
+{
+    start = chrono::steady_clock::now();
+}
+
+void GameMechs::endMeasurementAndRecord()
+{    
+    elapsedTime = chrono::steady_clock::now() - start;
+    totalTime += elapsedTime.count();
+    iterCount++;    
+}
+
+double GameMechs::getAverageTime()
+{
+    if(iterCount == 0) return 0.0;
+    return totalTime / iterCount;
 }

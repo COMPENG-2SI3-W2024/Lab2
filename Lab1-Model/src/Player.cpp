@@ -20,7 +20,7 @@ Player::Player(int x, int y, char symbol, GameMechs* gm, ItemBin* bin)
     // Configure TEST_LENGTH to validate your asymptotic analysis on movePlayer()
     // with killable turned off.
     // for(int i = 0; i < TEST_LENGTH; i++)
-        myPos->insertHead(objPos(x, y, -1, 0, symbol));
+        myPos->insertTail(objPos(x, y, -1, 0, symbol));
        
     gmRef = gm;
     boardRef = gmRef->getBoardRef();

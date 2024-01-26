@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -I. -I../inc -g
-OBJ = objPos.o objPosArrayList.o GameMechs.o MacUILib.o Player.o ItemBin.o ScreenDrawer.o MainGame.o 
+OBJ = objPos.o objPosArrayList.o objPosDLinkedList.o GameMechs.o MacUILib.o Player.o ItemBin.o ScreenDrawer.o MainGame.o 
 DEPS = *.h
 
 ifeq (${OS}, Windows_NT)
