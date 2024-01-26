@@ -41,20 +41,18 @@ GameMechs::~GameMechs()
 
 void GameMechs::setInitBoard()  // private helper function
 {
-    for(int i = 0; i < boardSizeY; i++)  // T1 = Theta(n)
+    for(int i = 0; i < boardSizeY; i++) 
     {
-        for(int j = 0; j < boardSizeX; j++)  // T2 = Theta(n)
+        for(int j = 0; j < boardSizeX; j++)  
         {
-            if(i == 0 || i == (boardSizeY - 1) || j == 0 || j == (boardSizeX - 1))  // T3 = Theta(1)
+            if(i == 0 || i == (boardSizeY - 1) || j == 0 || j == (boardSizeX - 1))  
                 gameBoard[i][j] = '#';  
             else
-                gameBoard[i][j] = ' ';  
-            // T4 = Theta(1)
+                gameBoard[i][j] = ' '; 
         }
     }  
 }
 
-// T = T1 * T2 * (T3+T4) = Theta(n * n * (1+1)) = Theta(2n^2) = Theta(n^2) ##
 
 int GameMechs::getBoardSizeX() const
 {
@@ -78,17 +76,17 @@ bool GameMechs::getLoseFlag() const
 
 char GameMechs::getCMD() const
 {
-    return cmd;  // Theta(1)
-}  // Theta(1)
+    return cmd;  
+}  
 
 char** GameMechs::getBoardRef() const
 {
-    return gameBoard;     // Theta(1)
-}    // Theta(1)
+    return gameBoard;     
+}    
 
 Player** GameMechs::getPlayerListRef() const
 {
-    return playerList;  // Theta(1)
+    return playerList;  
 }
 
 int GameMechs::getPlayerCount() const

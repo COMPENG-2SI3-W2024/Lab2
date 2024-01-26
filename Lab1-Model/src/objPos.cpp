@@ -13,87 +13,87 @@ objPos::objPos()
 
 objPos::objPos(int xp, int yp, int num, char pref, char s)
 {
-    x = xp;   // Theta(1)
-    y = yp;  // Theta(1)
-    number = num;  // Theta(1)
-    prefix = pref;  // Theta(1)
-    symbol = s;  // Theta(1)
-} // Theta(1)
+    x = xp;   
+    y = yp;  
+    number = num;  
+    prefix = pref;  
+    symbol = s;  
+} 
 
 objPos::objPos(const objPos& thisPos) // copy constructor
 {
-    x = thisPos.x; // Theta(1)
-    y = thisPos.y; // Theta(1)
-    number = thisPos.number; // Theta(1)
-    prefix = thisPos.prefix; // Theta(1)
-    symbol = thisPos.symbol; // Theta(1)
-} // Theta(1)
+    x = thisPos.x; 
+    y = thisPos.y; 
+    number = thisPos.number; 
+    prefix = thisPos.prefix; 
+    symbol = thisPos.symbol; 
+} 
 
 objPos& objPos::operator= (const objPos& thisPos)
 {
-    if(this != &thisPos)  // Theta(1)
+    if(this != &thisPos)  
     {
-        x = thisPos.x;      // Theta(1)
-        y = thisPos.y;      // Theta(1)
-        number = thisPos.number;      // Theta(1)
-        prefix = thisPos.prefix;      // Theta(1)
-        symbol = thisPos.symbol;      // Theta(1)
+        x = thisPos.x;      
+        y = thisPos.y;      
+        number = thisPos.number;      
+        prefix = thisPos.prefix;     
+        symbol = thisPos.symbol;     
     }
 
-    return *this;      // Theta(1)
+    return *this;    
 }
-// Theta(1)
+
 
 
 int objPos::getX() const
 {
-    return x; // Theta(1)
+    return x; 
 }
 
 int objPos::getY() const
 {
-    return y;// Theta(1)
+    return y;
 }
 
 int objPos::getNum() const
 {
-    return number;// Theta(1)
+    return number;
 }
 
 char objPos::getPF() const
 {
-    return prefix;// Theta(1)
+    return prefix;
 }
 
 char objPos::getSym() const
 {
-    return symbol;// Theta(1)
+    return symbol;
 }
 
 
 void objPos::setX(int xp)
 {
-    x = xp;// Theta(1)
+    x = xp;
 }
 
 void objPos::setY(int yp)
 {
-    y = yp;// Theta(1)
+    y = yp;
 }
 
 void objPos::setNum(int num)
 {
-    number = num % 100;  // cap at two-digits// Theta(1)
+    number = num % 100;  // cap at two-digits
 }
 
 void objPos::setPF(char pref)
 {
-    prefix = pref;// Theta(1)
+    prefix = pref;
 }
 
 void objPos::setSym(char sym)
 {
-    symbol = sym;// Theta(1)
+    symbol = sym;
 }
 
 void objPos::copyObjPos(objPos &thisPos)
@@ -107,8 +107,8 @@ void objPos::copyObjPos(objPos &thisPos)
 
 bool objPos::isOverlap(const objPos* thisPos) const
 {
-    return (x == thisPos->getX() && y == thisPos->getY());  // Theta(1)
-}// Theta(1)
+    return (x == thisPos->getX() && y == thisPos->getY());  
+}
 
 void objPos::printObjPos() const
 {
