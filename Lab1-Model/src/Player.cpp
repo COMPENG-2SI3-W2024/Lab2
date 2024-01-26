@@ -161,7 +161,7 @@ bool Player::checkSelfCollision()  // private
         }
     }
 
-    return false;// Theta(1)
+    return false;
 }
 
 
