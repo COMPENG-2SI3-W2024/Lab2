@@ -37,9 +37,9 @@ int main(int argc, char* argv[])
         // I. GET INPUT
         myGM->processInput();
        
-        // II. RUN LOGIC          
-        player1->movePlayer();        
-              
+        // II. RUN LOGIC                 
+        player1->movePlayer();   
+                      
         // III. DRAW SCREEN  
         myDrawer->Draw();            
         myDrawer->DrawAverageComputationTime(myGM->getAverageTime());        

@@ -1,11 +1,11 @@
 #include "Player.h"
 #include "objPosArrayList.h"
-//#include "objPosDLinkedList.h"
+#include "objPosDLinkedList.h"
 
 #include <iostream>
 using namespace std;
 
-#define TEST_LENGTH 1000
+#define TEST_LENGTH 50000
 
 Player::Player(int x, int y, char symbol, GameMechs* gm, ItemBin* bin)
 {
@@ -15,11 +15,11 @@ Player::Player(int x, int y, char symbol, GameMechs* gm, ItemBin* bin)
     //myPos = new objPosDLinkedList();
 
     // turn false for performance estimation in Lab 2
-    killable = true;  
+    killable = false;  
     
     // Configure TEST_LENGTH to validate your asymptotic analysis on movePlayer()
     // with killable turned off.
-    // for(int i = 0; i < TEST_LENGTH; i++)
+    for(int i = 0; i < TEST_LENGTH; i++)
         myPos->insertTail(objPos(x, y, -1, 0, symbol));
        
     gmRef = gm;
@@ -72,9 +72,9 @@ void Player::movePlayer()
 {    
     updatePlayerFSM();   
     if(myDir == STOP) return;    
-
-    undrawPlayer(); 
     
+    undrawPlayer(); 
+        
     objPos currHeadPos = myPos->getHead();   
     int inX = currHeadPos.getX();  
     int inY = currHeadPos.getY();     
@@ -108,10 +108,13 @@ void Player::movePlayer()
     currHeadPos.setX(inX);               
     currHeadPos.setY(inY);// TARGET      
     
-    myPos->insertHead(currHeadPos);  // insert new head     
+    gmRef->startMeasurement();
+    myPos->insertHead(currHeadPos);  // insert new head 
+    gmRef->endMeasurementAndRecord();    
 
     if(!checkCollision())            // check collision.  If collision never happened,  
         myPos->removeTail();         // removeTail.  Otherwise, generate new item.    
+    
     
     if(killable)                         
         if(checkSelfCollision())
