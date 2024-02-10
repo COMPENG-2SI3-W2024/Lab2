@@ -58,12 +58,16 @@ void ItemBin::generateItem()
 
     //int bitVec[gmRef->getBoardSizeX()][gmRef->getBoardSizeY()]= {0};
 
-    // to prevent stack overflow
-    int xsize = gmRef->getBoardSizeX();       
-    int ysize = gmRef->getBoardSizeY();       
-    int** bitVec = new int*[xsize];           
-    for(int i = 0; i < xsize; i++)           
-       bitVec[i] = new int[ysize];            
+     // to prevent stack overflow
+    int xsize = gmRef->getBoardSizeX();
+    int ysize = gmRef->getBoardSizeY();
+    int** bitVec = new int*[xsize];
+    for(int i = 0; i < xsize; i++)
+    {
+        bitVec[i] = new int[ysize];
+        for(int j = 0; j < ysize; j++)
+            bitVec[i][j] = 0;
+    }            
 
 
     int playerLength = playerPos->getSize();    
