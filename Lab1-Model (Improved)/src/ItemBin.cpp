@@ -58,7 +58,7 @@ void ItemBin::generateItem()
 
     //int bitVec[gmRef->getBoardSizeX()][gmRef->getBoardSizeY()]= {0};
 
-     // to prevent stack overflow
+    // to prevent stack overflow
     int xsize = gmRef->getBoardSizeX();
     int ysize = gmRef->getBoardSizeY();
     int** bitVec = new int*[xsize];
