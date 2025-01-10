@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -I. -I../inc -g -std=c++11
-OBJ = objPos.o objPosArrayList.o objPosDLinkedList.o GameMechs.o MacUILib.o Player.o ItemBin.o ScreenDrawer.o MainGame.o 
+OBJ = objPos.o objPosArrayList.o objPosDLinkedList.o objPosSLinkedList.o GameMechs.o MacUILib.o Player.o ItemBin.o ScreenDrawer.o MainGame.o 
 DEPS = *.h
 
 ifeq (${OS}, Windows_NT)
@@ -10,7 +10,7 @@ else
 	POSTLINKER = -lncurses   ## uncomment this if on Linux
 endif
 
-EXEC = Project
+EXEC = ../bin/Project
 
 %.o: %.cpp $(DEPENDS)
 	$(CC) ${OSSETTING} -c -o $@ $< $(CFLAGS)

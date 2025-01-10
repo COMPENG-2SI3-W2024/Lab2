@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-// Develop the objPos Doubly Linked List here.  
+// Develop the objPos Doubly Linked List WITH DUMMY HEADER here.  
 // Use the Test cases Test.cpp to complete the Test-Driven Development
 
 objPosDLinkedList::objPosDLinkedList()

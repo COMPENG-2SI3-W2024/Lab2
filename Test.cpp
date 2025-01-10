@@ -2,25 +2,25 @@
 #include "objPosList.h"
 #include "objPosArrayList.h"
 #include "objPosDLinkedList.h"
+#include "objPosSLinkedList.h"
 
 #include <cstdlib>
 #include <ctime>
 
 #define COUNT 10
-#define TOTAL_ASSERT_COUNT 439
-#define TOTAL_TEST_CASES 40
+#define TOTAL_TEST_CASES 100
 
 #include <iostream>
 using namespace std;
 
 // ******************* //
-// Turn this true once you are ready to test getNext() and resetReadPos()
-bool testGetNextReady = false;
+// Turn these true once you are ready to test getNext() and resetReadPos()
+bool testGetNextReadyD = false;  // For Doubly Linked List
+bool testGetNextReadyS = false;  // For Singly Linked List
 // ******************* //
 
 
 objPosList *ListUnderTest;
-int successCount;
 int passCount;
 
 void clearList();
@@ -28,24 +28,25 @@ objPos generateRandomPos();
 bool assert_equal(int, int);
 bool assert_equal(char, char);
 
+///////////////////////////////////////
+///////////////////////////////////////
+/// DOUBLY LINKED LIST WITH HEADER ////
+///////////////////////////////////////
+///////////////////////////////////////
+
 // This is the polymorphic list changer
-void createNewList()
+void createNewDList()
 {
-	if(ListUnderTest != NULL) clearList();
-	//ListUnderTest = new objPosArrayList();	
+	if(ListUnderTest != NULL) clearList();	
 	ListUnderTest = new objPosDLinkedList();
 }
 
-
-
-
-
-void testConstructorGetSize() {
+void testConstructorGetSizeD() {
 	
 	bool result = true;
 
-	cout << "TEST: testConstructorGetSize" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testConstructorGetSizeD" << endl;
+	createNewDList();
 	int expected = 0;
 	int actual = ListUnderTest->getSize();	
 
@@ -54,12 +55,12 @@ void testConstructorGetSize() {
 	if(result) passCount++;
 }
 
-void testConstructorIsEmptyTrue() {
+void testConstructorIsEmptyTrueD() {
 	
 	bool result = true;
 
-	cout << "TEST: testConstructorIsEmptyTrue" << endl;
-	createNewList();	
+	cout << "TEST(DLinkedList): testConstructorIsEmptyTrueD" << endl;
+	createNewDList();	
 	bool expected = true;
 	bool actual = ListUnderTest->isEmpty();		
 
@@ -69,18 +70,16 @@ void testConstructorIsEmptyTrue() {
 }
 
 
-
-
 // INSERT HEAD
 // INSERT HEAD
 // INSERT HEAD
 
-void testInsertHeadIsEmptyFalse() {
+void testInsertHeadIsEmptyFalseD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadIsEmptyFalse" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadIsEmptyFalseD" << endl;
+	createNewDList();
 	objPos testPos{};
 	ListUnderTest->insertHead(testPos);
 
@@ -92,12 +91,12 @@ void testInsertHeadIsEmptyFalse() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetSize() {
+void testInsertHeadGetSizeD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetSize" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetSizeD" << endl;
+	createNewDList();
 	objPos testPos{};
 	ListUnderTest->insertHead(testPos);
 	ListUnderTest->insertHead(testPos);
@@ -110,12 +109,12 @@ void testInsertHeadGetSize() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetHead() {
+void testInsertHeadGetHeadD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetHead" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetHeadD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -135,12 +134,12 @@ void testInsertHeadGetHead() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetTail() {
+void testInsertHeadGetTailD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetTail" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetTailD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -160,12 +159,12 @@ void testInsertHeadGetTail() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetNegTen() {
+void testInsertHeadGetNegTenD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetNegTen" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetNegTenD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -185,12 +184,12 @@ void testInsertHeadGetNegTen() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetZero() {
+void testInsertHeadGetZeroD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetZero" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetZeroD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -210,12 +209,12 @@ void testInsertHeadGetZero() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetOne() {
+void testInsertHeadGetOneD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetOne" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetOneD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -235,12 +234,12 @@ void testInsertHeadGetOne() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetCountN3() {
+void testInsertHeadGetCountN3D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetCountN3" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetCountN3D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -260,12 +259,12 @@ void testInsertHeadGetCountN3() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetCountN1() {
+void testInsertHeadGetCountN1D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetCountN1" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetCountN1D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -285,12 +284,12 @@ void testInsertHeadGetCountN1() {
 	if(result) passCount++;
 }
 
-void testInsertHeadGetCountP5() {
+void testInsertHeadGetCountP5D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertHeadGetCountP5" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertHeadGetCountP5D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -317,12 +316,12 @@ void testInsertHeadGetCountP5() {
 // INSERT TAIL
 // INSERT TAIL
 
-void testInsertTailIsEmptyFalse() {
+void testInsertTailIsEmptyFalseD() {
 
 	bool result = true;
 
-	cout << "TEST: testInsertTailIsEmptyFalse" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailIsEmptyFalseD" << endl;
+	createNewDList();
 	objPos testPos{};
 	ListUnderTest->insertTail(testPos);
 
@@ -334,12 +333,12 @@ void testInsertTailIsEmptyFalse() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetSize() {
+void testInsertTailGetSizeD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetSize" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetSizeD" << endl;
+	createNewDList();
 	objPos testPos{};
 	ListUnderTest->insertTail(testPos);
 	ListUnderTest->insertTail(testPos);
@@ -352,12 +351,12 @@ void testInsertTailGetSize() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetHead() {
+void testInsertTailGetHeadD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetHead" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetHeadD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -377,12 +376,12 @@ void testInsertTailGetHead() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetTail() {
+void testInsertTailGetTailD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetTail" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetTailD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -402,12 +401,12 @@ void testInsertTailGetTail() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetNegTen() {
+void testInsertTailGetNegTenD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetNegTen" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetNegTenD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -427,12 +426,12 @@ void testInsertTailGetNegTen() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetZero() {
+void testInsertTailGetZeroD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetZero" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetZeroD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -452,12 +451,12 @@ void testInsertTailGetZero() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetOne() {
+void testInsertTailGetOneD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetOne" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetOneD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -477,12 +476,12 @@ void testInsertTailGetOne() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetCountN3() {
+void testInsertTailGetCountN3D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetCountN3" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetCountN3D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -502,12 +501,12 @@ void testInsertTailGetCountN3() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetCountN1() {
+void testInsertTailGetCountN1D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetCountN1" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetCountN1D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -527,12 +526,12 @@ void testInsertTailGetCountN1() {
 	if(result) passCount++;
 }
 
-void testInsertTailGetCountP5() {
+void testInsertTailGetCountP5D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertTailGetCountP5" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertTailGetCountP5D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -559,12 +558,12 @@ void testInsertTailGetCountP5() {
 // INSERT
 // INSERT
 
-void testInsertIsEmptyFalse() {
+void testInsertIsEmptyFalseD() {
 
 	bool result = true;
 
-	cout << "TEST: testInsertIsEmptyFalse" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertIsEmptyFalseD" << endl;
+	createNewDList();
 	objPos testPos{};
 	ListUnderTest->insert(testPos, 0);
 
@@ -576,12 +575,12 @@ void testInsertIsEmptyFalse() {
 	if(result) passCount++;
 }
 
-void testInsertGetSize() {
+void testInsertGetSizeD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetSize" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetSizeD" << endl;
+	createNewDList();
 	objPos testPos{};
 	ListUnderTest->insert(testPos, 0);
 	ListUnderTest->insert(testPos, -1);
@@ -594,12 +593,12 @@ void testInsertGetSize() {
 	if(result) passCount++;
 }
 
-void testInsertGetHead() {
+void testInsertGetHeadD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetHead" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetHeadD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -619,12 +618,12 @@ void testInsertGetHead() {
 	if(result) passCount++;
 }
 
-void testInsertGetTail() {
+void testInsertGetTailD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetTail" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetTailD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -644,12 +643,12 @@ void testInsertGetTail() {
 	if(result) passCount++;
 }
 
-void testInsertGetNegTen() {
+void testInsertGetNegTenD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetNegTen" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetNegTenD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -669,12 +668,12 @@ void testInsertGetNegTen() {
 	if(result) passCount++;
 }
 
-void testInsertGetZero() {
+void testInsertGetZeroD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetZero" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetZeroD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -694,12 +693,12 @@ void testInsertGetZero() {
 	if(result) passCount++;
 }
 
-void testInsertGetOne() {
+void testInsertGetOneD() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetOne" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetOneD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -719,12 +718,12 @@ void testInsertGetOne() {
 	if(result) passCount++;
 }
 
-void testInsertGetCountN3() {
+void testInsertGetCountN3D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetCountN3" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetCountN3D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -744,12 +743,12 @@ void testInsertGetCountN3() {
 	if(result) passCount++;
 }
 
-void testInsertGetCountN1() {
+void testInsertGetCountN1D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetCountN1" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetCountN1D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -769,12 +768,12 @@ void testInsertGetCountN1() {
 	if(result) passCount++;
 }
 
-void testInsertGetCountP5() {
+void testInsertGetCountP5D() {
 	
 	bool result = true;
 
-	cout << "TEST: testInsertGetCountP5" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testInsertGetCountP5D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -800,12 +799,12 @@ void testInsertGetCountP5() {
 // REMOVE TAIL
 // REMOVE 
 
-void testRemoveHead() {
+void testRemoveHeadD() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveHead" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveHeadD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -831,12 +830,12 @@ void testRemoveHead() {
 	if(result) passCount++;
 }
 
-void testRemoveTail() {
+void testRemoveTailD() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveTail" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveTailD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -862,12 +861,12 @@ void testRemoveTail() {
 	if(result) passCount++;
 }
 
-void testRemoveNegTen() {
+void testRemoveNegTenD() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveNegTen" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveNegTenD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -893,12 +892,12 @@ void testRemoveNegTen() {
 	if(result) passCount++;
 }
 
-void testRemoveZero() {
+void testRemoveZeroD() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveZero" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveZeroD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -924,12 +923,12 @@ void testRemoveZero() {
 	if(result) passCount++;
 }
 
-void testRemoveOne() {
+void testRemoveOneD() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveOne" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveOneD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -955,12 +954,12 @@ void testRemoveOne() {
 	if(result) passCount++;
 }
 
-void testRemoveCountN3() {
+void testRemoveCountN3D() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveCountN3" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveCountN3D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -986,12 +985,12 @@ void testRemoveCountN3() {
 	if(result) passCount++;
 }
 
-void testRemoveCountN1() {
+void testRemoveCountN1D() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveCountN1" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveCountN1D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1017,12 +1016,12 @@ void testRemoveCountN1() {
 	if(result) passCount++;
 }
 
-void testRemoveCountP5() {
+void testRemoveCountP5D() {
 	
 	bool result = true;
 
-	cout << "TEST: testRemoveCountP5" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testRemoveCountP5D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1054,12 +1053,12 @@ void testRemoveCountP5() {
 // SET
 // SET
 
-void testSetNegTen() {
+void testSetNegTenD() {
 	
 	bool result = true;
 
-	cout << "TEST: testSetNegTen" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testSetNegTenD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1080,12 +1079,12 @@ void testSetNegTen() {
 	if(result) passCount++;
 }
 
-void testSetZero() {
+void testSetZeroD() {
 	
 	bool result = true;
 
-	cout << "TEST: testSetZero" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testSetZeroD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1106,12 +1105,12 @@ void testSetZero() {
 	if(result) passCount++;
 }
 
-void testSetOne() {
+void testSetOneD() {
 	
 	bool result = true;
 
-	cout << "TEST: testSetOne" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testSetOneD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1132,12 +1131,12 @@ void testSetOne() {
 	if(result) passCount++;
 }
 
-void testSetCountN3() {
+void testSetCountN3D() {
 	
 	bool result = true;
 
-	cout << "TEST: testSetCountN3" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testSetCountN3D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1158,12 +1157,12 @@ void testSetCountN3() {
 	if(result) passCount++;
 }
 
-void testSetCountN1() {
+void testSetCountN1D() {
 	
 	bool result = true;
 
-	cout << "TEST: testSetCountN1" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testSetCountN1D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1184,12 +1183,12 @@ void testSetCountN1() {
 	if(result) passCount++;
 }
 
-void testSetCountP5() {
+void testSetCountP5D() {
 	
 	bool result = true;
 
-	cout << "TEST: testSetCountP5" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testSetCountP5D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1215,12 +1214,12 @@ void testSetCountP5() {
 // GET NEXT and RESET
 // GET NEXT and RESET
 
-void testGetNextResetWholeList() {
+void testGetNextResetWholeListD() {
 	
 	bool result = true;
 
-	cout << "TEST: testGetNextResetWholeList" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testGetNextResetWholeListD" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1246,12 +1245,12 @@ void testGetNextResetWholeList() {
 	if(result) passCount++;
 }
 
-void testGetNextResetPos2() {
+void testGetNextResetPos2D() {
 	
 	bool result = true;
 
-	cout << "TEST: testGetNextResetPos2" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testGetNextResetPos2D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1290,12 +1289,12 @@ void testGetNextResetPos2() {
 	if(result) passCount++;
 }
 
-void testGetNextResetPos5() {
+void testGetNextResetPos5D() {
 	
 	bool result = true;
 
-	cout << "TEST: testGetNextResetPos5" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testGetNextResetPos5D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1334,12 +1333,12 @@ void testGetNextResetPos5() {
 	if(result) passCount++;
 }
 
-void testGetNextResetPos8() {
+void testGetNextResetPos8D() {
 	
 	bool result = true;
 
-	cout << "TEST: testGetNextResetPos8" << endl;
-	createNewList();
+	cout << "TEST(DLinkedList): testGetNextResetPos8D" << endl;
+	createNewDList();
 	objPos itemArray[COUNT];
 	for(int i = 0; i < COUNT; i++)	
 	{
@@ -1379,62 +1378,1473 @@ void testGetNextResetPos8() {
 }
 
 
-// add two more test cases for your unit test learning purpose
+///////////////////////////////////////
+///////////////////////////////////////
+// SINGLY LINKED LIST WITHOUT HEADER //
+///////////////////////////////////////
+///////////////////////////////////////
+
+// This is the polymorphic list changer
+void createNewSList()
+{
+	if(ListUnderTest != NULL) clearList();		
+	ListUnderTest = new objPosSLinkedList();
+}
+
+
+void testConstructorGetSizeS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testConstructorGetSizeS" << endl;
+	createNewSList();
+	int expected = 0;
+	int actual = ListUnderTest->getSize();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testConstructorIsEmptyTrueS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testConstructorIsEmptyTrueS" << endl;
+	createNewSList();	
+	bool expected = true;
+	bool actual = ListUnderTest->isEmpty();		
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+// INSERT HEAD
+// INSERT HEAD
+// INSERT HEAD
+
+void testInsertHeadIsEmptyFalseS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadIsEmptyFalseS" << endl;
+	createNewSList();
+	objPos testPos{};
+	ListUnderTest->insertHead(testPos);
+
+	bool expected = false;
+	bool actual = ListUnderTest->isEmpty();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetSizeS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetSizeS" << endl;
+	createNewSList();
+	objPos testPos{};
+	ListUnderTest->insertHead(testPos);
+	ListUnderTest->insertHead(testPos);
+	ListUnderTest->insertHead(testPos);
+	int expected = 3;
+	int actual = ListUnderTest->getSize();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetHeadS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetHeadS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->getHead();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetTailS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetTailS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->getTail();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetNegTenS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetNegTenS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->get(-10);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetZeroS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetZeroS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->get(0);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetOneS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetOneS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-2];
+	objPos actual = ListUnderTest->get(1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetCountN3S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetCountN3S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[2];
+	objPos actual = ListUnderTest->get(COUNT-3);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetCountN1S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetCountN1S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->get(COUNT-1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertHeadGetCountP5S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertHeadGetCountP5S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertHead(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->get(COUNT+5);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+
+// INSERT TAIL
+// INSERT TAIL
+// INSERT TAIL
+
+void testInsertTailIsEmptyFalseS() {
+
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailIsEmptyFalseS" << endl;
+	createNewSList();
+	objPos testPos{};
+	ListUnderTest->insertTail(testPos);
+
+	bool expected = false;
+	bool actual = ListUnderTest->isEmpty();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetSizeS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetSizeS" << endl;
+	createNewSList();
+	objPos testPos{};
+	ListUnderTest->insertTail(testPos);
+	ListUnderTest->insertTail(testPos);
+	ListUnderTest->insertTail(testPos);
+	int expected = 3;
+	int actual = ListUnderTest->getSize();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetHeadS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetHeadS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->getHead();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetTailS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetTailS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->getTail();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetNegTenS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetNegTenS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->get(-10);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetZeroS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetZeroS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->get(0);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetOneS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetOneS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[1];
+	objPos actual = ListUnderTest->get(1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetCountN3S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetCountN3S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-3];
+	objPos actual = ListUnderTest->get(COUNT-3);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetCountN1S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetCountN1S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->get(COUNT-1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertTailGetCountP5S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertTailGetCountP5S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insertTail(itemArray[i]);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->get(COUNT+5);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+// INSERT
+// INSERT
+// INSERT
+
+void testInsertIsEmptyFalseS() {
+
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertIsEmptyFalseS" << endl;
+	createNewSList();
+	objPos testPos{};
+	ListUnderTest->insert(testPos, 0);
+
+	bool expected = false;
+	bool actual = ListUnderTest->isEmpty();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetSizeS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetSizeS" << endl;
+	createNewSList();
+	objPos testPos{};
+	ListUnderTest->insert(testPos, 0);
+	ListUnderTest->insert(testPos, -1);
+	ListUnderTest->insert(testPos, 10);
+	int expected = 3;
+	int actual = ListUnderTest->getSize();	
+
+	result = result && assert_equal(expected, actual);
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetHeadS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetHeadS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->getHead();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetTailS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetTailS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->getTail();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetNegTenS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetNegTenS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->get(-10);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetZeroS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetZeroS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->get(0);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetOneS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetOneS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[1];
+	objPos actual = ListUnderTest->get(1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetCountN3S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetCountN3S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-3];
+	objPos actual = ListUnderTest->get(COUNT-3);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetCountN1S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetCountN1S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->get(COUNT-1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testInsertGetCountP5S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testInsertGetCountP5S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->get(COUNT+5);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+
+// REMOVE HEAD
+// REMOVE TAIL
+// REMOVE 
+
+void testRemoveHeadS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveHeadS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}	
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->removeHead();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveTailS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveTailS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->removeTail();	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveNegTenS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveNegTenS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->remove(-10);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveZeroS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveZeroS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[0];
+	objPos actual = ListUnderTest->remove(0);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveOneS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveOneS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}	
+	
+	objPos expected = itemArray[1];
+	objPos actual = ListUnderTest->remove(1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveCountN3S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveCountN3S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-3];
+	objPos actual = ListUnderTest->remove(COUNT-3);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveCountN1S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveCountN1S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->remove(COUNT-1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+void testRemoveCountP5S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testRemoveCountP5S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = itemArray[COUNT-1];
+	objPos actual = ListUnderTest->remove(COUNT+5);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+
+	int actualSize = ListUnderTest->getSize();
+	int expectedSize = COUNT - 1;
+
+	result = result && assert_equal(expectedSize, actualSize);
+
+	clearList();
+	if(result) passCount++;
+}
+
+
+// SET
+// SET
+// SET
+
+void testSetNegTenS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testSetNegTenS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+
+	objPos expected = generateRandomPos();	
+	ListUnderTest->set(expected, -10);
+	objPos actual = ListUnderTest->get(-10);	
+	
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testSetZeroS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testSetZeroS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = generateRandomPos();
+	ListUnderTest->set(expected, 0);
+	objPos actual = ListUnderTest->get(0);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testSetOneS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testSetOneS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = generateRandomPos();
+	ListUnderTest->set(expected, 1);
+	objPos actual = ListUnderTest->get(1);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testSetCountN3S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testSetCountN3S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = generateRandomPos();
+	ListUnderTest->set(expected, COUNT-3);
+	objPos actual = ListUnderTest->get(COUNT-3);	
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testSetCountN1S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testSetCountN1S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = generateRandomPos();
+	ListUnderTest->set(expected, COUNT-1);
+	objPos actual = ListUnderTest->get(COUNT-1);
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+void testSetCountP5S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testSetCountP5S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected = generateRandomPos();
+	ListUnderTest->set(expected, COUNT+5);
+	objPos actual = ListUnderTest->get(COUNT+5);
+
+	result = result && assert_equal(expected.getX(), actual.getX());
+	result = result && assert_equal(expected.getY(), actual.getY());
+	result = result && assert_equal(expected.getNum(), actual.getNum());
+	result = result && assert_equal(expected.getPF(), actual.getPF());
+	result = result && assert_equal(expected.getSym(), actual.getSym());
+	clearList();
+	if(result) passCount++;
+}
+
+// GET NEXT and RESET
+// GET NEXT and RESET
+// GET NEXT and RESET
+
+void testGetNextResetWholeListS() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testGetNextResetWholeListS" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected, actual;
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < ListUnderTest->getSize(); i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+	
+	clearList();
+	if(result) passCount++;
+}
+
+void testGetNextResetPos2S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testGetNextResetPos2S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected, actual;
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < 2; i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < ListUnderTest->getSize(); i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+	
+	clearList();
+	if(result) passCount++;
+}
+
+void testGetNextResetPos5S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testGetNextResetPos5S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected, actual;
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < 5; i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < ListUnderTest->getSize(); i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+	
+	clearList();
+	if(result) passCount++;
+}
+
+void testGetNextResetPos8S() {
+	
+	bool result = true;
+
+	cout << "TEST(SLinkedList): testGetNextResetPos8S" << endl;
+	createNewSList();
+	objPos itemArray[COUNT];
+	for(int i = 0; i < COUNT; i++)	
+	{
+		itemArray[i] = generateRandomPos();
+		ListUnderTest->insert(itemArray[i], i);
+	}
+	
+	objPos expected, actual;
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < 8; i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+
+	ListUnderTest->resetReadPos();
+	for(int i = 0; i < ListUnderTest->getSize(); i++)
+	{
+		expected = itemArray[i];
+		actual = ListUnderTest->getNext();
+
+		result = result && assert_equal(expected.getX(), actual.getX());
+		result = result && assert_equal(expected.getY(), actual.getY());
+		result = result && assert_equal(expected.getNum(), actual.getNum());
+		result = result && assert_equal(expected.getPF(), actual.getPF());
+		result = result && assert_equal(expected.getSym(), actual.getSym());
+	}
+	
+	clearList();
+	if(result) passCount++;
+}
 
 
 bool runAllTests(int argc, char const *argv[]) {
-	
-	
-    testConstructorGetSize();
-	testConstructorIsEmptyTrue();
+		
+    testConstructorGetSizeD();	
+	testConstructorIsEmptyTrueD();
 
-	testInsertHeadIsEmptyFalse();
-	testInsertHeadGetSize();
-	testInsertHeadGetHead();
-	testInsertHeadGetTail();
-	testInsertHeadGetNegTen();
-	testInsertHeadGetZero();
-	testInsertHeadGetOne();
-	testInsertHeadGetCountN3();
-	testInsertHeadGetCountN1();
-	testInsertHeadGetCountP5();
+	testInsertHeadIsEmptyFalseD();
+	testInsertHeadGetSizeD();
+	testInsertHeadGetHeadD();
+	testInsertHeadGetTailD();
+	testInsertHeadGetNegTenD();
+	testInsertHeadGetZeroD();
+	testInsertHeadGetOneD();
+	testInsertHeadGetCountN3D();
+	testInsertHeadGetCountN1D();
+	testInsertHeadGetCountP5D();
 
-	testInsertTailIsEmptyFalse();
-	testInsertTailGetSize();
-	testInsertTailGetHead();
-	testInsertTailGetTail();
-	testInsertTailGetNegTen();
-	testInsertTailGetZero();
-	testInsertTailGetOne();
-	testInsertTailGetCountN3();
-	testInsertTailGetCountN1();
-	testInsertTailGetCountP5();
+	testInsertTailIsEmptyFalseD();
+	testInsertTailGetSizeD();
+	testInsertTailGetHeadD();
+	testInsertTailGetTailD();
+	testInsertTailGetNegTenD();
+	testInsertTailGetZeroD();
+	testInsertTailGetOneD();
+	testInsertTailGetCountN3D();
+	testInsertTailGetCountN1D();
+	testInsertTailGetCountP5D();
 
-	testRemoveHead();
-	testRemoveTail();
-	testRemoveNegTen();
-	testRemoveZero();
-	testRemoveOne();
-	testRemoveCountN3();
-	testRemoveCountN1();
-	testRemoveCountP5();
+	testInsertIsEmptyFalseD();
+	testInsertGetSizeD();
+	testInsertGetHeadD();
+	testInsertGetTailD();
+	testInsertGetNegTenD();
+	testInsertGetZeroD();
+	testInsertGetOneD();
+	testInsertGetCountN3D();
+	testInsertGetCountN1D();
+	testInsertGetCountP5D();
 
-	testSetNegTen();
-	testSetZero();
-	testSetOne();
-	testSetCountN3();
-	testSetCountN1();
-	testSetCountP5();
+	testRemoveHeadD();
+	testRemoveTailD();
+	testRemoveNegTenD();
+	testRemoveZeroD();
+	testRemoveOneD();
+	testRemoveCountN3D();
+	testRemoveCountN1D();
+	testRemoveCountP5D();
 
-	if(testGetNextReady)
+	testSetNegTenD();
+	testSetZeroD();
+	testSetOneD();
+	testSetCountN3D();
+	testSetCountN1D();
+	testSetCountP5D();
+
+	if(testGetNextReadyD)
 	{
-		testGetNextResetWholeList();
-		testGetNextResetPos2();
-		testGetNextResetPos5();
-		testGetNextResetPos8();
+		testGetNextResetWholeListD();
+		testGetNextResetPos2D();
+		testGetNextResetPos5D();
+		testGetNextResetPos8D();
 	}
+
+
+
+	testConstructorGetSizeS();
+	testConstructorIsEmptyTrueS();
+
+	testInsertHeadIsEmptyFalseS();
+	testInsertHeadGetSizeS();
+	testInsertHeadGetHeadS();
+	testInsertHeadGetTailS();
+	testInsertHeadGetNegTenS();
+	testInsertHeadGetZeroS();
+	testInsertHeadGetOneS();
+	testInsertHeadGetCountN3S();
+	testInsertHeadGetCountN1S();
+	testInsertHeadGetCountP5S();
 	
-	if(successCount != TOTAL_ASSERT_COUNT) 
+	testInsertTailIsEmptyFalseS();
+	testInsertTailGetSizeS();
+	testInsertTailGetHeadS();
+	testInsertTailGetTailS();
+	testInsertTailGetNegTenS();
+	testInsertTailGetZeroS();
+	testInsertTailGetOneS();
+	testInsertTailGetCountN3S();
+	testInsertTailGetCountN1S();
+	testInsertTailGetCountP5S();
+	
+	testInsertIsEmptyFalseS();
+	testInsertGetSizeS();
+	testInsertGetHeadS();
+	testInsertGetTailS();
+	testInsertGetNegTenS();
+	testInsertGetZeroS();
+	testInsertGetOneS();
+	testInsertGetCountN3S();
+	testInsertGetCountN1S();
+	testInsertGetCountP5S();
+
+	testRemoveHeadS();
+	testRemoveTailS();
+	testRemoveNegTenS();
+	testRemoveZeroS();
+	testRemoveOneS();
+	testRemoveCountN3S();
+	testRemoveCountN1S();
+	testRemoveCountP5S();
+	
+	testSetNegTenS();
+	testSetZeroS();
+	testSetOneS();
+	testSetCountN3S();
+	testSetCountN1S();
+	testSetCountP5S();
+	
+	if(testGetNextReadyS)
+	{
+		testGetNextResetWholeListS();
+		testGetNextResetPos2S();
+		testGetNextResetPos5S();
+		testGetNextResetPos8S();
+	}	
+	
+	if(passCount != TOTAL_TEST_CASES) 
 		return false;
 	else 
 		return true;
@@ -1442,13 +2852,11 @@ bool runAllTests(int argc, char const *argv[]) {
 
 int main(int argc, char const *argv[]) {
   	
-	srand(time(NULL));
-	successCount = 0;
+	srand(time(NULL));	
 	passCount = 0;
 	bool successCode = runAllTests(argc, argv);
 	if(successCode)	cout << endl << "Passed All Tests" << endl;
-	else			cout << "Failed Tests, Check Failure" << endl;	
-	cout << "Assertion Score: " << successCount << " / " << TOTAL_ASSERT_COUNT << endl;	
+	else			cout << "Failed Tests, Check Failure" << endl;		
 	cout << "Test Case Score: " << passCount << " / " << TOTAL_TEST_CASES << endl;
 
 	return successCode? EXIT_SUCCESS : EXIT_FAILURE;
@@ -1477,9 +2885,7 @@ objPos generateRandomPos()
 bool assert_equal(int a, int b)
 {
 	bool result = (a == b);
-	if(result)	
-		successCount++;
-	else
+	if(!result)	
 	{
 		cout << "\t\t[ASSERTION] Expected: " << a << ", but Actual: " << b << endl;		
 	}
@@ -1489,9 +2895,7 @@ bool assert_equal(int a, int b)
 bool assert_equal(char a, char b)
 {
 	bool result = (a == b);
-	if(result)	
-		successCount++;
-	else
+	if(!result)	
 	{
 		cout << "\t\tExpected: " << a << ", but Actual: " << b << endl;		
 	}
