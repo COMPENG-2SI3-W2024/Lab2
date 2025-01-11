@@ -12,7 +12,6 @@ Player::Player(int x, int y, char symbol, GameMechs* gm, ItemBin* bin)
    
     // Choose the list type for Lab 2
     myPos = new objPosArrayList();    
-    //myPos = new objPosDLinkedList();
 
     // turn false for performance estimation in Lab 2
     killable = false;  
@@ -115,6 +114,7 @@ void Player::movePlayer()
     if(!checkCollision())            // check collision.  If collision never happened,  
         myPos->removeTail();         // removeTail.  Otherwise, generate new item.    
     
+    // Think about how you'd measure removeTail() computation time.
     
     if(killable)                         
         if(checkSelfCollision())

@@ -22,7 +22,7 @@ class SNode  // singly list node
 // Public inheritance - using ObjPosList interface
 class objPosSLinkedList : public objPosList
 {
-    // Singly linked list with only head pointer, and WITHOUT HEADER
+    // Singly linked list with only head pointer, and WITHOUT DUMMY HEADER
     private:
         SNode* listHead;        
         SNode* persistHead;
